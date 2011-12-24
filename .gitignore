@@ -1,0 +1,5 @@
+target/
+project/boot/
+.release.sbt
+.idea/
+.idea_modules/
