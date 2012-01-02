@@ -1,0 +1,62 @@
+import com.google.api.client.http.javanet.NetHttpTransport
+import com.google.api.client.googleapis.auth.clientlogin._
+import com.google.api.services.calendar.Calendar
+import com.google.api.client.json.jackson.JacksonFactory
+import com.google.api.services.calendar.model.{Calendar => CalendarModel}
+
+
+val httpTransport = new  NetHttpTransport
+val authenticator = new ClientLogin();
+authenticator.authTokenType = "ndev";
+authenticator.username = "bot@novoda.com";
+authenticator.password = "botn1v1da";
+authenticator.transport = httpTransport
+
+
+val jsonFactory =  new JacksonFactory
+
+val calendar = new Calendar(httpTransport, jsonFactory)
+calendar.setOauthToken(authenticator.authenticate.auth)
+
+val newCalendar = new CalendarModel
+//newCalendar.setDescription("HelloWorld")
+newCalendar.setSummary("Hello World")
+
+
+//Today I worked on AdFonic
+
+
+Calendar.builder(httpTransport, jsonFactory).setApplicationName("novoda-buildbot-0.01").setHttpRequestInitializer(authenticator.authenticate).build.calendars.insert(newCalendar).execute
+
+val CLIENT_ID = "642469717422.apps.googleusercontent.com";
+val CLIENT_SECRET = "zPKhZZQwTpByHzS-Ufnp8EBf";
+val CALLBACK_URL = "urn:ietf:wg:oauth:2.0:oob";
+val SCOPE = "https://www.googleapis.com/auth/calendar"
+
+val authorizeUrl = new GoogleAuthorizationRequestUrl(CLIENT_ID, CALLBACK_URL, SCOPE).build();
+
+println("Open: " +authorizeUrl )
+
+Console.readLine
+
+val authRequest = new GoogleAuthorizationCodeGrant(httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, "4/Roce7-jJfX9CjJSjZpVSpO2LlxWk", CALLBACK_URL);
+
+val authResponse = authRequest.execute
+
+val access = new GoogleAccessProtectedResource(authResponse.accessToken, httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, authResponse.refreshToken);
+
+Calendar.builder(httpTransport, jsonFactory).setApplicationName("novoda-buildbot-0.01").setHttpRequestInitializer(access).build.calendars.insert(newCalendar).execute
+
+val json = """{
+ "items": [
+  {
+   "id": "en.uk#holiday@group.v.calendar.google.com",
+   "description": "UK Holidays"
+  }
+ ]
+}"""
+
+ val jf = new JacksonFactory
+val p = jf.createJsonParser(json)
+
+p.parse[com.google.api.services.calendar.model.CalendarList](classOf[com.google.api.services.calendar.model.CalendarList], new com.google.api.client.json.CustomizeJsonParser)
