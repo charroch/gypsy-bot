@@ -39,7 +39,7 @@ println("Open: " +authorizeUrl )
 
 Console.readLine
 
-val authRequest = new GoogleAuthorizationCodeGrant(httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, "4/Roce7-jJfX9CjJSjZpVSpO2LlxWk", CALLBACK_URL);
+val authRequest = new GoogleAuthorizationCodeGrant(httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, "4/iUH2LLgEK9nK5F-4EJYf3hVNrxZH", CALLBACK_URL);
 
 val authResponse = authRequest.execute
 

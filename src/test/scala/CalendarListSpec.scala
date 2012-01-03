@@ -22,4 +22,13 @@ class CalendarSpec extends Specification {
 
  // Today I worked on Adfonic
   // findOrCreateByDescription("Adfonic");
+
+
+  /**
+   * List of domain language used:
+   *
+   * (Today | tomorrow | on the 17th of November |) (I | Luigi | carl@novoda.com) worked (on Adfonic | on project AdFonic)
+   *
+   *
+   */
 }
